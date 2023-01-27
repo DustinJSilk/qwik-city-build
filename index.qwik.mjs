@@ -1,4 +1,4 @@
-import { createContext, componentQrl, inlinedQrl, useContext, jsx, SkipRender, withLocale, noSerialize, useEnvData, useStore, useSignal, useLexicalScope, useContextProvider, useTaskQrl, Slot, getLocale, useOnDocument, implicit$FirstArg, untrack, useRender, SSRHint, _wrapSignal } from "@builder.io/qwik";
+import { createContext, componentQrl, inlinedQrl, useContext, jsx, SkipRender, withLocale, noSerialize, useServerData, useStore, useSignal, useLexicalScope, useContextProvider, useTaskQrl, Slot, getLocale, useOnDocument, implicit$FirstArg, untrack, useRender, SSRHint, _wrapSignal } from "@builder.io/qwik";
 import { jsx as jsx$1 } from "@builder.io/qwik/jsx-runtime";
 import { isServer, isBrowser } from "@builder.io/qwik/build";
 import swRegister from "@qwik-city-sw-register";
@@ -148,7 +148,7 @@ const useDocumentHead = () => useContext(DocumentHeadContext);
 const useLocation = () => useContext(RouteLocationContext);
 const useNavigate = () => useContext(RouteNavigateContext);
 const useAction = () => useContext(RouteActionContext);
-const useQwikCityEnv = () => noSerialize(useEnvData("qwikcity"));
+const useQwikCityEnv = () => noSerialize(useServerData("qwikcity"));
 const toPath = (url) => url.pathname + url.search + url.hash;
 const toUrl = (url, baseUrl) => new URL(url, baseUrl.href);
 const isSameOrigin = (a, b) => a.origin === b.origin;
@@ -314,7 +314,7 @@ const QwikCityProvider = /* @__PURE__ */ componentQrl(inlinedQrl(() => {
   const env = useQwikCityEnv();
   if (!env?.params)
     throw new Error(`Missing Qwik City Env Data`);
-  const urlEnv = useEnvData("url");
+  const urlEnv = useServerData("url");
   if (!urlEnv)
     throw new Error(`Missing Qwik URL Env Data`);
   const url = new URL(urlEnv);
